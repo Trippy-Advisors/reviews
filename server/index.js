@@ -3,9 +3,11 @@ const path = require("path");
 const app = express();
 const port = 3001;
 const db = require("./db.js");
+const compression = require("compression");
 
 app.use("/:id", express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
+app.use(compression());
 
 app.get("/reviews/hotels/:hotelId", (req, res) => {
   db.getReviewsbyID(req.params.hotelId, (err, results) => {
